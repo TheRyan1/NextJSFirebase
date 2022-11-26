@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from "next/router";
 import { useAuth } from "../../Context/AuthContext";
 import Protected from '../../components/Protected';
-function index() {
+function Index() {
     const { user, logOut } = useAuth();
     const router = useRouter();
     const handleLogout = async () => {
@@ -22,4 +22,4 @@ function index() {
   )
 }
 
-export default index
+export default Index
