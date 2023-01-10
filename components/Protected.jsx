@@ -4,17 +4,13 @@ import { useAuth } from "../Context/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
   const router = useRouter();
-  const { user,loadingUser } = useAuth();
-    const checkLoginStatus = async()=>{
-
-    }
+  const { user, loadingUser } = useAuth();
+  const checkLoginStatus = async () => {};
   useEffect(() => {
-    
-    if (!user.uid &&  (loadingUser== false)) {
-      
-      router.push("/Login");
-    }else{
-        console.log(user)
+    if (!user.uid && loadingUser == false) {
+      router.push("/auth/login");
+    } else {
+      console.log(user);
     }
   }, [loadingUser]);
   return <div>{user.uid ? children : <div>Loading Login Status</div>}</div>;

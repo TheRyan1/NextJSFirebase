@@ -8,7 +8,7 @@ function Index() {
     const handleLogout = async () => {
         try {
           await logOut();
-          router.push("/Login");
+          router.push("/auth/login");
         } catch (error) {
           console.log(error.message);
         }

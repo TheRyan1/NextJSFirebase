@@ -1,42 +1,42 @@
 import React,{useState} from "react";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useAuth } from "../Context/AuthContext";
+
+import { useAuth } from "../../Context/AuthContext";
 import { Grid, Typography, TextField  } from "@mui/material";
 import { ToastContainer, toast } from 'react-toastify';
 import LoadingButton from '@mui/lab/LoadingButton'
-function Login() {
-  const { logIn, user } = useAuth();
+function SignUp() {
+  const { SignUp } = useAuth();
   const [loginLoading,setLoginLoading] = useState(false)
 
   const router = useRouter();
 
-  const logInUser = async (data) => {
+  const SignUpUser = async (data) => {
     try {
       setLoginLoading(true)
-      await logIn(data.email, data.password);
-      toast("Login Success",{type:"success"})
-      router.push("/dashboard");
+      await SignUp(data.email, data.password);
+      toast("Sign Up Successful",{type:"success"})
+      router.push("/auth/login");
     } catch (error) {
       setLoginLoading(false)
       console.log(error.message);
       toast(error.message,{type:"error" })
     }
   };
-  React.useEffect(() => {
-    console.log(user);
-    if (user.uid) {
-      router.push("/dashboard");
-    }
-  }, [router, user]);
+  // React.useEffect(() => {
+  //   console.log(user);
+  //   if (user.uid) {
+  //     router.push("/dashboard");
+  //   }
+  // }, [router, user]);
   const { values, submitForm, handleChange } = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     onSubmit: (values) => {
-      logInUser(values);
+      SignUpUser(values);
     },
   });
   return (
@@ -57,7 +57,7 @@ function Login() {
         sx={{ width: "fit-content",boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",padding:"20px",borderRadius:"10px"}}
       >
         <Grid item xs={12}>
-          <Typography variant="h3">Login</Typography>
+          <Typography variant="h3">Sign Up</Typography>
         </Grid>
         <Grid item xs={12}>
           <TextField
@@ -82,7 +82,7 @@ function Login() {
         </Grid>
         <Grid item xs={12}>
           <LoadingButton loading={loginLoading} variant="contained" onClick={submitForm}>
-            LOGIn
+            Sign Up
           </LoadingButton>
         </Grid>
       </Grid>
@@ -90,4 +90,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignUp;
