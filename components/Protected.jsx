@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }) => {
       console.log(user);
     }
   }, [loadingUser]);
-  return <div>{user.uid ? children : <div>Loading Login Status</div>}</div>;
+  return <div>{user.uid ? children : <div>Checking login status</div>}</div>;
 };
 
 export default ProtectedRoute;
